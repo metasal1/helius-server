@@ -1,7 +1,8 @@
 import http from 'http';
 import https from 'https';
 import save from './save.js';
-import helius from './helius.json';
+import * as helius from './helius.json' assert { type: 'json' };
+
 
 const port = 4000; // the port on which the server will listen
 
