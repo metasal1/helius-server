@@ -14,12 +14,7 @@ const server = http.createServer((req, res) => {
 
             // transform the payload to suit the Discord webhook format
             const payload = {
-                marketplace: 'magiceden',
-                collection: 'lily',
-                buyer: body[0]?.accountData[0]?.account,
-                seller: body[0]?.accountData[1]?.account,
-                price: body[0]?.nativeTransfers[0],
-                description: body[0]?.description
+                body
             };
 
             // save to MongoDB
