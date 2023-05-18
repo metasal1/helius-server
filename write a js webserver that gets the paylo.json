@@ -1,0 +1,52 @@
+write a js webserver that gets the payload below and transforms it to suit discord webhook
+
+[
+  {
+    "accountData": [
+      {
+        "account": "GZ2NkNPSkVyog8wM2yk2Do2Hq6rvxPt5vjXhnQMe9q1P",
+        "nativeBalanceChange": -200005000,
+        "tokenBalanceChanges": []
+      },
+      {
+        "account": "GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4",
+        "nativeBalanceChange": 200000000,
+        "tokenBalanceChanges": []
+      },
+      {
+        "account": "11111111111111111111111111111111",
+        "nativeBalanceChange": 0,
+        "tokenBalanceChanges": []
+      }
+    ],
+    "description": "GZ2NkNPSkVyog8wM2yk2Do2Hq6rvxPt5vjXhnQMe9q1P transferred 0.2 SOL to GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4.",
+    "events": {},
+    "fee": 5000,
+    "feePayer": "GZ2NkNPSkVyog8wM2yk2Do2Hq6rvxPt5vjXhnQMe9q1P",
+    "instructions": [
+      {
+        "accounts": [
+          "GZ2NkNPSkVyog8wM2yk2Do2Hq6rvxPt5vjXhnQMe9q1P",
+          "GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4"
+        ],
+        "data": "3Bxs3zz3fjzUYuEP",
+        "innerInstructions": [],
+        "programId": "11111111111111111111111111111111"
+      }
+    ],
+    "nativeTransfers": [
+      {
+        "amount": 200000000,
+        "fromUserAccount": "GZ2NkNPSkVyog8wM2yk2Do2Hq6rvxPt5vjXhnQMe9q1P",
+        "toUserAccount": "GaxVqiQyJKQDRu6H4pfy9V6Xq19pHGr6HQKDQDv911Y4"
+      }
+    ],
+    "signature": "4w6RE5PLefn58xMdJYHh51Nh9eHnEEYNWBLhzXpPfo9VoV9kTddhQGfGZnZkNKoVfPYjinsxGgRXNj7E6LDPjePb",
+    "slot": 214571572,
+    "source": "SYSTEM_PROGRAM",
+    "timestamp": 1683611271,
+    "tokenTransfers": [],
+    "transactionError": null,
+    "type": "TRANSFER"
+  }
+]
