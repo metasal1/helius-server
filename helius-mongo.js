@@ -1,7 +1,7 @@
 import http from 'http';
 import https from 'https';
 import save from './save.js';
-import helius from './helius.json'
+import * as helius from './helius.json' assert { type: 'json' };
 
 const port = 4000; // the port on which the server will listen
 
@@ -17,11 +17,12 @@ const server = http.createServer((req, res) => {
             const payload = {
                 source: helius.body[0].source,
                 description: helius.body[0].description,
-                type: helius.body[0].type,
-                seller: helius.body[0].seller,
-                buyer: helius.body[0].buyer,
-                price: helius.body[0].price,
                 signature: helius.body[0].signature,
+                buyer: helius.body[0].events.nft.buyer,
+                seller: helius.body[0].events.nft.seller,
+                price: helius.body[0].events.nft.price,
+                type: helius.body[0].events.nft.type,
+                nft: helius.body[0].events.nft.nfts[0].mint
             };
 
             // save to MongoDB
