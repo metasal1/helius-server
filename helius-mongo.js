@@ -13,6 +13,7 @@ app.post('/', (req, res) => {
     const seller = payload[0].events.nft.seller;
     const price = payload[0].events.nft.amount;
     const mint = payload[0].events.nft.nfts[0].mint;
+    const description = payload[0].description;
 
     if (nftType && source && price && mint) {
         const forwardedPayload = {
@@ -29,6 +30,10 @@ app.post('/', (req, res) => {
 
         if (seller) {
             forwardedPayload.seller = seller;
+        }
+
+        if (description) {
+            forwardedPayload.description = description;
         }
 
         save('helius', 'nfts', forwardedPayload)
