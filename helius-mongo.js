@@ -14,8 +14,8 @@ const server = http.createServer((req, res) => {
 
             // transform the payload to suit the Discord webhook format
             const payload = {
-                source: body?.body[0]?.source,
-                description: body?.body[0]?.description,
+                source: body[0]?.source,
+                // description: body[0]?.description,
                 signature: body?.body[0]?.signature,
                 buyer: body?.body[0]?.events.nft.buyer,
                 seller: body?.body[0]?.events.nft.seller,
