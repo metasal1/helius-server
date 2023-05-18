@@ -20,6 +20,7 @@ app.post('/', (req, res) => {
             mint: mint,
             source: source,
             price: price,
+            timestamp: Date.now(),
         };
 
         if (buyer) {
