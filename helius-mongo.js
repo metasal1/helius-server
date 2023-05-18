@@ -15,14 +15,14 @@ const server = http.createServer((req, res) => {
 
             // transform the payload to suit the Discord webhook format
             const payload = {
-                source: helius.body[0].source,
-                description: helius.body[0].description,
-                signature: helius.body[0].signature,
-                buyer: helius.body[0].events.nft.buyer,
-                seller: helius.body[0].events.nft.seller,
-                price: helius.body[0].events.nft.price,
-                type: helius.body[0].events.nft.type,
-                nft: helius.body[0].events.nft.nfts[0].mint
+                source: body.body[0]?.source,
+                description: body.body[0]?.description,
+                signature: body.body[0]?.signature,
+                buyer: body.body[0]?.events.nft.buyer,
+                seller: body.body[0]?.events.nft.seller,
+                price: body.body[0]?.events.nft.price,
+                type: body.body[0]?.events.nft.type,
+                nft: body.body[0]?.events.nft.nfts[0].mint
             };
 
             // save to MongoDB
