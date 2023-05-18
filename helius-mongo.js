@@ -1,51 +1,42 @@
-import http from 'http';
-import https from 'https';
+import express from 'express';
 import save from './save.js';
-import * as helius from './helius.json' assert { type: 'json' };
+const app = express();
+const port = 4000;
 
+app.use(express.json());
 
-const port = 4000; // the port on which the server will listen
+app.post('/', (req, res) => {
+    const payload = req.body;
+    const nftType = payload.body[0].events.nft.type;
+    const source = payload.body[0].source;
+    const buyer = payload.body[0].events.nft.buyer;
+    const seller = payload.body[0].events.nft.seller;
+    const price = payload.body[0].events.nft.amount;
+    const mint = payload.body[0].events.nft.nfts[0].mint;
 
-const server = http.createServer((req, res) => {
-    if (req.method === 'POST') {
+    if (nftType && source && price && mint) {
+        const forwardedPayload = {
+            type: nftType,
+            mint: mint,
+            source: source,
+            price: price,
+        };
 
-        // let body = [];
-        // req.on('data', (chunk) => {
-        // body.push(chunk);
-        // }).on('end', () => {
-        // body = JSON.parse(Buffer.concat(body).toString());
+        if (buyer) {
+            forwardedPayload.buyer = buyer;
+        }
 
-        // transform the payload to suit the Discord webhook format
+        if (seller) {
+            forwardedPayload.seller = seller;
+        }
 
-        req.on('end', (body) => {
-
-            const payload = {
-                body
-                // source: body.source,
-                // description: body.description,
-                // signature: body[0]?.signature,
-                // buyer: body[0].events?.nft?.buyer,
-                // seller: body[0]?.events?.nft?.seller,
-                // price: body[0]?.events?.nft?.price,
-                // type: body[0]?.events?.nft?.type,
-                // nft: body[0]?.events?.nft?.nfts[0]?.mint
-            };
-
-            // save to MongoDB
-
-            save('helius', 'helius', payload)
-            // send a response to the client
-            res.statusCode = 200;
-            res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify(payload));
-        });
+        save('helius', 'nfts', forwardedPayload)
+        res.json(forwardedPayload);
     } else {
-        res.statusCode = 405;
-        res.setHeader('Allow', 'POST');
-        res.end('Method not allowed');
+        res.status(400).json({ error: 'Invalid payload or missing fields.' });
     }
 });
 
-server.listen(port, () => {
-    console.log(`Helius to Mongo Server running at http://localhost:${port}/`);
+app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
 });
