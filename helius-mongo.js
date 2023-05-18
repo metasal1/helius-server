@@ -7,12 +7,12 @@ app.use(express.json());
 
 app.post('/', (req, res) => {
     const payload = req.body;
-    const nftType = payload.body[0].events.nft.type;
-    const source = payload.body[0].source;
-    const buyer = payload.body[0].events.nft.buyer;
-    const seller = payload.body[0].events.nft.seller;
-    const price = payload.body[0].events.nft.amount;
-    const mint = payload.body[0].events.nft.nfts[0].mint;
+    const nftType = payload[0].events.nft.type;
+    const source = payload[0].source;
+    const buyer = payload[0].events.nft.buyer;
+    const seller = payload[0].events.nft.seller;
+    const price = payload[0].events.nft.amount;
+    const mint = payload[0].events.nft.nfts[0].mint;
 
     if (nftType && source && price && mint) {
         const forwardedPayload = {
